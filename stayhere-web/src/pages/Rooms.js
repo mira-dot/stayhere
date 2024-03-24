@@ -21,7 +21,7 @@ const Rooms = ({ rooms, totalDays }) => {
                                     <button onClick={e => setIsBookingFormVisible(true)} type="button" className="btn btn-primary text-center w-50 mt-2">BOOK {">"}</button>
                                 </div>
                                 <div className="col-6">
-                                    <img height={100} src={`/images/room_${room.RoomId}.png`} alt={`Room ${room.RoomId}`} />
+                                    <img className="float-end" height={100} src={`/images/room_${room.RoomId}.png`} alt={`Room ${room.RoomId}`} />
                                 </div>
                             </div>
                         </div>
