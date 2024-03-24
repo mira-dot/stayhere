@@ -1,0 +1,62 @@
+[
+    {
+        "RoomId": 1,
+        "Capacity": 1,
+        "Price": 100,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 2,
+        "Capacity": 1,
+        "Price": 100,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 3,
+        "Capacity": 1,
+        "Price": 100,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 4,
+        "Capacity": 1,
+        "Price": 100,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 5,
+        "Capacity": 2,
+        "Price": 150,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 6,
+        "Capacity": 2,
+        "Price": 150,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 7,
+        "Capacity": 2,
+        "Price": 150,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 8,
+        "Capacity": 3,
+        "Price": 200,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 9,
+        "Capacity": 3,
+        "Price": 200,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    },
+    {
+        "RoomId": 10,
+        "Capacity": 4,
+        "Price": 250,
+        "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
+    }
+]

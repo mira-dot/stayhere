@@ -40,7 +40,7 @@ const BookingForm = ({ room, visible, onClose }) => {
                             </div>
                             <div className="col-6">
                                 <label className="form-label">Payment</label>
-                                <select value={booking.PaymentType} onChange={e => setBooking({ PaymentType: e.target.value })} class="form-select">
+                                <select value={booking.PaymentType} onChange={e => setBooking({ PaymentType: e.target.value })} className="form-select">
                                     <option value="CASH">CASH</option>
                                     <option value="CARD">CARD</option>
                                 </select>
