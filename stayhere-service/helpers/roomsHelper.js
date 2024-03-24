@@ -18,11 +18,6 @@ function getAvailaleRooms(allRooms, allBookings, checkin, checkout, guests) {
                     continue;
 
                 // date check
-                if (booking.Status === "CHECKEDIN") //someone is already living in this room
-                {
-                    isAvailable = false;
-                    break;
-                }
                 if (checkin < booking.checkout) // overlap of checkin and checkout, the same day checkin is allowed
                 {
                     isAvailable = false
