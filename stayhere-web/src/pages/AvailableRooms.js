@@ -13,14 +13,23 @@ const AvailableRooms = () => {
   const checkout = searchParams.get("checkout");
   const guests = searchParams.get("guests");
   useEffect(() => {
+    setErrorValue("");
     fetch(`${api}/rooms/get?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
-      .then((res) => res.json()).then((parsedJson) => {
+      .then((response) => {
+        if (!response.ok) {
+          setErrorValue(response.statusText)
+          return [];
+        }
+        else
+          return response.json();
+      }).then((parsedJson) => {
         if (parsedJson.errorString?.length > 0) {
           setErrorValue(parsedJson.errorString);
         } else {
           setRooms(Array.from(parsedJson));
         }
-      });
+      })
+      .catch(error => setErrorValue(error));
   }, [checkin, checkout, guests]);
 
   return (
@@ -31,7 +40,7 @@ const AvailableRooms = () => {
         <span className="col-4">Check-out: {checkout}</span>
         <span className="col-4">Guests: {guests}</span>
       </div>
-      {errorValue.length > 0 && <div className="text-white text-center strong bg-danger">Aaa</div>}
+      {errorValue.length > 0 && <div className="text-white text-center strong bg-danger">{errorValue}</div>}
       <Rooms rooms={rooms} totalDays={totalDays} />
     </>
   )

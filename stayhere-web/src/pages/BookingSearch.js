@@ -25,6 +25,10 @@ const BookingSearch = () => {
             alert("Fill in the check-in date");
             return;
         }
+        if (toDate(checkIn) < toDate(new Date().toLocaleDateString())) {
+            alert("Check-In date must not be less than today!");
+            return;
+        }
         if (checkOut === "") {
             alert("Fill in the check-out date");
             return;
@@ -33,8 +37,7 @@ const BookingSearch = () => {
             alert("Check-Out date must be grater than Check-In date!");
             return;
         }
-        if(Number(guests) <=0)
-        {
+        if (Number(guests) <= 0) {
             alert("Guests must be greater than 0");
             return;
         }
