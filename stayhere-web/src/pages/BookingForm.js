@@ -36,6 +36,8 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
     }, [bookingDetails])
 
     const book = (e) => {
+        if (!isValid())
+            return;
         axios.post(`${process.env.REACT_APP_API_BASE_URL}/booking/create`, {
             FirstName: booking.FirstName.value,
             LastName: booking.LastName.value,
@@ -49,8 +51,20 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
             Guests: bookingDetails.Guests,
             FinalPrice: bookingDetails.FinalPrice,
             Status: "NEW"
-        })
-            .then(() => { setRefreshTime(new Date()); setShowThankYou(true) })
+        }).then(() => { setRefreshTime(new Date()); setShowThankYou(true) })
+    }
+    const isValid = (e) => {
+        setBooking(state => ({
+            FirstName: { isValid: booking.FirstName.value?.length > 0 },
+            LastName: { isValid: booking.LastName.value?.length > 0 },
+            Email: { isValid: booking.Email.value?.length > 0 },
+            Address: { isValid: booking.Address.value?.length > 0 }
+        }))
+
+        return booking.FirstName.isValid &&
+            booking.LastName.isValid &&
+            booking.Email.isValid &&
+            booking.Address.isValid
     }
     const close = (e) => {
         onClose(e);
@@ -61,17 +75,32 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
                 <div className="row">
                     <div className="col-6">
                         <label className="form-label">First Name</label>
-                        <input defaultValue={booking.FirstName.value} onChange={e => setBooking(state => ({ ...state, FirstName: { value: e.target.value } }))} className="form-control" type="text" />
+                        <input
+                            defaultValue={booking.FirstName.value}
+                            onChange={e => setBooking(state => ({ ...state, FirstName: { value: e.target.value, isValid: e.target.value.length > 0 } }))}
+                            className={"form-control " + (booking.FirstName.isValid ? "" : "is-invalid")}
+                            type="text"
+                        />
                     </div>
                     <div className="col-6">
                         <label className="form-label">Last Name</label>
-                        <input defaultValue={booking.LastName.value} onChange={e => setBooking(state => ({ ...state, LastName: { value: e.target.value } }))} className="form-control" type="text" />
+                        <input
+                            defaultValue={booking.LastName.value}
+                            onChange={e => setBooking(state => ({ ...state, LastName: { value: e.target.value, isValid: e.target.value.length > 0 } }))}
+                            className={"form-control " + (booking.LastName.isValid ? "" : "is-invalid")}
+                            type="text"
+                        />
                     </div>
                 </div>
                 <div className="row mt-2">
                     <div className="col-6">
                         <label className="form-label">Email</label>
-                        <input defaultValue={booking.Email.value} onChange={e => setBooking(state => ({ ...state, Email: { value: e.target.value } }))} className="form-control" type="text" />
+                        <input
+                            defaultValue={booking.Email.value}
+                            onChange={e => setBooking(state => ({ ...state, Email: { value: e.target.value, isValid: e.target.value.length > 0 } }))}
+                            className={"form-control " + (booking.Email.isValid ? "" : "is-invalid")}
+                            type="text"
+                        />
                     </div>
                     <div className="col-6">
                         <label className="form-label">Payment</label>
@@ -84,7 +113,12 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
                 <div className="row mt-2">
                     <div className="col-12">
                         <label className="form-label">Address</label>
-                        <input defaultValue={booking.Address.value} onChange={e => setBooking(state => ({ ...state, Address: { value: e.target.value } }))} className="form-control" type="text" />
+                        <input
+                            defaultValue={booking.Address.value}
+                            onChange={e => setBooking(state => ({ ...state, Address: { value: e.target.value, isValid: e.target.value.length > 0 } }))}
+                            className={"form-control " + (booking.Address.isValid ? "" : "is-invalid")}
+                            type="text"
+                        />
                     </div>
                     <div className="col-12 mt-3">
                         <label className="form-label">Comment</label>

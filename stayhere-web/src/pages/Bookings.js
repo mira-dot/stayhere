@@ -45,6 +45,19 @@ const Bookings = () => {
             })
     }
 
+    const mailTo = (booking) => {
+        const lineBreak = "%0D%0A"
+        const subject = `Stay Here booking #${booking.BookingId} confirmation`
+        let body = `Dear ${booking.Customer.FirstName} ${booking.Customer.LastName}, ${lineBreak}We are happy to inform you that your booking is confirmed!`
+        body += lineBreak + lineBreak
+        body += `Check-in: ${format(booking.CheckIn, "dd/MM/yyyy")}`
+        body += lineBreak;
+        body += `Check-out: ${format(booking.CheckOut, "dd/MM/yyyy")}`
+        body += lineBreak + lineBreak
+        body += `We can’t wait to see you!${lineBreak}Stay Here Team`
+        return `mailto:${booking.Customer.Email}?subject=${subject}&body=${body}`
+    }
+
     return (
         <>
             <h2 className="text-center">Bookings Table</h2>
@@ -70,7 +83,7 @@ const Bookings = () => {
                                 <td>{booking.BookingId}</td>
                                 <td>
                                     <span className="text-danger">Name:</span> {booking.Customer.FirstName} {booking.LastName}<br />
-                                    <span className="text-danger">Email:</span> {booking.Customer.Email}<br />
+                                    <span className="text-danger">Email:</span> <a href={mailTo(booking)}>{booking.Customer.Email}</a><br />
                                     <span className="text-danger">Address:</span> {booking.Customer.Address}<br />
                                     <span className="text-danger">Payment Type:</span> {booking.PaymentType}<br />
                                     <span className="text-danger">Comment:</span> {booking.Customer.Comment}<br />
