@@ -13,7 +13,11 @@ const createBookingSchema = () => {
         FinalPrice: Number,
         PaymentType: String,
         Comment: String,
-        Status: String
+        Status: String,
+        Customer: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Customer'
+        }
     })
     schema.plugin(AutoIncrement, { inc_field: 'BookingId' })
 

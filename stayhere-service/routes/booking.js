@@ -3,13 +3,13 @@ const { BookingModel, CustomerModel } = require("../dao/schemas");
 const router = express.Router();
 
 router.get("/get", async (req, res) => {
-    const bookings = await BookingModel.find({})
+    const bookings = await BookingModel.find({}).populate("Customer")
     res.send(bookings);
 });
 
 router.post("/create", async (req, res) => {
     const customer = await CustomerModel.create(req.body)
-    const booking = await BookingModel.create({ ...req.body, CustomerId: customer.CustomerId })
+    const booking = await BookingModel.create({ ...req.body, CustomerId: customer.CustomerId, Customer: customer })
     res.send(booking);
 });
 
