@@ -2,9 +2,10 @@ import { useSearchParams } from "react-router-dom";
 import Rooms from "./Rooms";
 import { differenceInCalendarDays } from "date-fns";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { MyGlobalContext } from "..";
 
 const AvailableRooms = () => {
-  const api = "http://localhost:3001";
   const [searchParams] = useSearchParams();
   const [rooms, setRooms] = useState([]);
   const [errorValue, setErrorValue] = useState("");
@@ -12,9 +13,20 @@ const AvailableRooms = () => {
   const checkin = searchParams.get("checkin");
   const checkout = searchParams.get("checkout");
   const guests = searchParams.get("guests");
+  const {
+    setCheckIn,
+    setCheckOut,
+    setGuests,
+    refreshTime
+} = useContext(MyGlobalContext)
+
   useEffect(() => {
     setErrorValue("");
-    fetch(`${api}/rooms/get?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
+    setCheckIn(checkin);
+    setCheckOut(checkout);
+    setGuests(guests);
+
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/room/get-available-rooms?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
       .then((response) => {
         if (!response.ok) {
           setErrorValue(response.statusText)
@@ -30,7 +42,7 @@ const AvailableRooms = () => {
         }
       })
       .catch(error => setErrorValue(error));
-  }, [checkin, checkout, guests]);
+  }, [checkin, checkout, guests, setCheckIn, setCheckOut, setGuests, refreshTime]);
 
   return (
     <>

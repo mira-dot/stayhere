@@ -1,12 +1,15 @@
 import { toDate } from "date-fns";
-import { useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { MyGlobalContext } from "..";
 
 const BookingSearch = () => {
     const navigate = useNavigate();
-    const [checkIn, setCheckIn] = useState("");
-    const [checkOut, setCheckOut] = useState("");
-    const [guests, setGuests] = useState("");
+    const {
+        checkIn, setCheckIn,
+        checkOut, setCheckOut,
+        guests, setGuests
+    } = useContext(MyGlobalContext)
 
     const handleCheckIn = (e) => {
         setCheckIn(e.target.value);

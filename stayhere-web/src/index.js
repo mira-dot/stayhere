@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootswatch/dist/cerulean/bootstrap.css";
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+export const MyGlobalContext = React.createContext({});
+
+export const MyGlobalProvider = ({ children }) => {
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [guests, setGuests] = useState("");
+  const [refreshTime, setRefreshTime] = useState(new Date());
+  return (
+    <MyGlobalContext.Provider value={{
+      checkIn, setCheckIn,
+      checkOut, setCheckOut,
+      guests, setGuests,
+      refreshTime, setRefreshTime
+    }}>
+      {children}
+    </MyGlobalContext.Provider>
+  );
+};
+
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <MyGlobalProvider>
+        <App />
+      </MyGlobalProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
