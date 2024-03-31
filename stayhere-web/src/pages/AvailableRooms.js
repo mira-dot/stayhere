@@ -4,6 +4,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MyGlobalContext } from "..";
+import axios from "axios";
 
 const AvailableRooms = () => {
   const [searchParams] = useSearchParams();
@@ -18,7 +19,7 @@ const AvailableRooms = () => {
     setCheckOut,
     setGuests,
     refreshTime
-} = useContext(MyGlobalContext)
+  } = useContext(MyGlobalContext)
 
   useEffect(() => {
     setErrorValue("");
@@ -26,20 +27,12 @@ const AvailableRooms = () => {
     setCheckOut(checkout);
     setGuests(guests);
 
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/room/get-available-rooms?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/room/get-available-rooms?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
       .then((response) => {
-        if (!response.ok) {
+        if (response.status !== 200)
           setErrorValue(response.statusText)
-          return [];
-        }
         else
-          return response.json();
-      }).then((parsedJson) => {
-        if (parsedJson.errorString?.length > 0) {
-          setErrorValue(parsedJson.errorString);
-        } else {
-          setRooms(Array.from(parsedJson));
-        }
+          setRooms(response.data);
       })
       .catch(error => setErrorValue(error));
   }, [checkin, checkout, guests, setCheckIn, setCheckOut, setGuests, refreshTime]);

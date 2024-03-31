@@ -45,7 +45,10 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
             Comment: booking.Comment,
             RoomId: bookingDetails.RoomId,
             CheckIn: bookingDetails.CheckIn,
-            CheckOut: bookingDetails.CheckOut
+            CheckOut: bookingDetails.CheckOut,
+            Guests: bookingDetails.Guests,
+            FinalPrice: bookingDetails.FinalPrice,
+            Status: "NEW"
         })
             .then(() => { setRefreshTime(new Date()); setShowThankYou(true) })
     }

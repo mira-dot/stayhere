@@ -11,7 +11,8 @@ const Rooms = ({ rooms, totalDays }) => {
             RoomId: room.RoomId,
             CheckIn: checkIn,
             CheckOut: checkOut,
-            Guests: guests
+            Guests: guests,
+            FinalPrice: totalDays * room.Price
         });
         setIsBookingFormVisible(true)
     }
