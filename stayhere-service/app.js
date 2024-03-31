@@ -28,6 +28,7 @@ app.use((req, res, next) => {
 
 app.use("/room", require("./routes/room"));
 app.use("/booking", require("./routes/booking"));
+app.use("/invoice", require("./routes/invoice"));
 
 app.listen(3001, async () => {
     await connectDB()

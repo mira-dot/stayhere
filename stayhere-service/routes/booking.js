@@ -1,5 +1,5 @@
 const express = require("express");
-const { BookingModel, CustomerModel } = require("../dao/schemas");
+const { BookingModel, CustomerModel, InvoiceModel } = require("../dao/schemas");
 const router = express.Router();
 
 router.get("/get", async (req, res) => {
@@ -14,8 +14,15 @@ router.post("/create", async (req, res) => {
 });
 
 router.post("/status/:bookingId/:status", async (req, res) => {
-    await BookingModel.findOneAndUpdate({ BookingId: req.params.bookingId }, { Status: req.params.status });
-    res.sendStatus(200);
+    const booking = await BookingModel.findOneAndUpdate({ BookingId: req.params.bookingId }, { Status: req.params.status }, { new: true }).populate("Customer");
+    console.log(booking)
+    res.send(booking);
+});
+
+router.post("/create-invoice/:bookingId", async (req, res) => {
+    const booking = await BookingModel.findOne({ BookingId: req.params.bookingId }).populate("Customer");
+    const invoiceId = await InvoiceModel.createInvoice(booking);
+    res.send({ invoiceId: invoiceId })
 });
 
 
