@@ -81,12 +81,12 @@ const Bookings = () => {
                         bookings.map(booking =>
                             <tr key={booking.BookingId}>
                                 <td>{booking.BookingId}</td>
-                                <td>
-                                    <span className="text-danger">Name:</span> {booking.Customer.FirstName} {booking.LastName}<br />
-                                    <span className="text-danger">Email:</span> <a href={mailTo(booking)}>{booking.Customer.Email}</a><br />
-                                    <span className="text-danger">Address:</span> {booking.Customer.Address}<br />
-                                    <span className="text-danger">Payment Type:</span> {booking.PaymentType}<br />
-                                    <span className="text-danger">Comment:</span> {booking.Customer.Comment}<br />
+                                <td className="text-end">
+                                    <span className="text-danger float-start">Name:</span> {booking.Customer.FirstName} {booking.LastName}<br />
+                                    <span className="text-danger float-start">Email:</span> <a href={mailTo(booking)}>{booking.Customer.Email}</a><br />
+                                    <span className="text-danger float-start">Address:</span> {booking.Customer.Address}<br />
+                                    <span className="text-danger float-start">Payment Type:</span> {booking.PaymentType}<br />
+                                    <span className="text-danger float-start">Comment:</span> {booking.Customer.Comment}<br />
                                 </td>
                                 <td>{booking.RoomId}</td>
                                 <td>{format(toDate(booking.CheckIn), "dd/MM/yyyy")}</td>
@@ -95,11 +95,15 @@ const Bookings = () => {
                                 <td>{booking.FinalPrice}</td>
                                 <td>{booking.Status}</td>
                                 <td>
-                                    <button onClick={e => changeStatus(booking.BookingId, "ACCEPTED")} type="button" className="btn btn-secondary mx-2">Accept {">"}</button>
-                                    <button onClick={e => changeStatus(booking.BookingId, "DECLINED")} type="button" className="btn btn-secondary mx-2">Decline {">"}</button>
-                                    <button onClick={e => changeStatus(booking.BookingId, "CHECKEDIN")} type="button" className="btn btn-secondary mx-2">Check-in {">"}</button>
-                                    <button onClick={e => changeStatus(booking.BookingId, "CHECKEDOUT")} type="button" className="btn btn-secondary mx-2">Check-out {">"}</button>
-                                    <button onClick={e => issueInvoice(booking.BookingId)} type="button" className="btn btn-secondary mx-2">Invoice {">"}</button>
+                                    <div>
+                                        <button onClick={e => changeStatus(booking.BookingId, "ACCEPTED")} type="button" className="btn btn-success mx-2">Accept {">"}</button>
+                                        <button onClick={e => changeStatus(booking.BookingId, "DECLINED")} type="button" className="btn btn-danger mx-2">Decline {">"}</button>
+                                    </div>
+                                    <div className="mt-2">
+                                        <button onClick={e => changeStatus(booking.BookingId, "CHECKEDIN")} type="button" className="btn btn-info mx-2">Check-in {">"}</button>
+                                        <button onClick={e => changeStatus(booking.BookingId, "CHECKEDOUT")} type="button" className="btn btn-dark mx-2">Check-out {">"}</button>
+                                        <button onClick={e => issueInvoice(booking.BookingId)} type="button" className="btn btn-primary mx-2">Invoice {">"}</button>
+                                    </div>
                                 </td>
                             </tr>
                         )
