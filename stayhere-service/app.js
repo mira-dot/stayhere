@@ -3,9 +3,7 @@ var cors = require('cors')
 const express = require("express");
 const { connectDB, disconnectDB } = require("./database/mongoose-in-memory");
 const seedRooms = require("./data/seedRooms");
-const roomsDAO = require('./dao/roomsDAO');
-const customersDAO = require('./dao/customersDAO');
-const createSchemas = require('./dao/schemas');
+const createSchemas = require('./database/schemas');
 
 const app = express();
 app.use(cors())
@@ -18,7 +16,7 @@ app.use(jsonParser)
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(urlencodedParser)
 
-app.get("/", () =>{
+app.get("/", () => {
     res.send("<h1>Service is OK!</h1>");
 });
 
