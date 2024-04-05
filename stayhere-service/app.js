@@ -3,6 +3,9 @@ var cors = require('cors')
 const express = require("express");
 const { connectDB, disconnectDB } = require("./database/mongoose-in-memory");
 const seedRooms = require("./data/seedRooms");
+const roomsDAO = require('./dao/roomsDAO');
+const customersDAO = require('./dao/customersDAO');
+const createSchemas = require('./dao/schemas');
 
 const app = express();
 app.use(cors())
@@ -32,6 +35,7 @@ app.use("/invoice", require("./routes/invoice"));
 
 app.listen(3001, async () => {
     await connectDB()
+    createSchemas()
     await seedRooms()
 });
 

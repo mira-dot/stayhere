@@ -1,9 +1,9 @@
 const express = require("express");
-const { InvoiceModel } = require("../dao/schemas");
+const invoicesDAO = require("../dao/invoicesDAO");
 const router = express.Router();
 
 router.get("/get/:invoiceId", async (req, res) => {
-    const invoice = await InvoiceModel.findOne({InvoiceId: req.params.invoiceId}).populate("Items")
+    const invoice = await invoicesDAO.getByInvoiceId(req.params.invoiceId)
     res.send(invoice);
 });
 

@@ -1,16 +1,15 @@
-const createRoomSchema = require("./roomSchema");
-const createCustomerSchema = require("./customerSchema");
-const createBookingSchema = require("./bookingSchema");
-const createInvoiceSchema = require("./invoiceSchema");
-const createInvoiceItemSchema = require("./invoiceItemSchema");
-const createSchema = () => {
-    return {
-        RoomModel: createRoomSchema(),
-        CustomerModel: createCustomerSchema(),
-        BookingModel: createBookingSchema(),
-        InvoiceModel: createInvoiceSchema(),
-        InvoiceItemModel: createInvoiceItemSchema()
-    }
+const bookingsDAO = require("./bookingsDAO")
+const customersDAO = require("./customersDAO")
+const invoiceItemsDAO = require("./invoiceItemsDAO")
+const invoicesDAO = require("./invoicesDAO")
+const roomsDAO = require("./roomsDAO")
+
+const createSchemas = () => {
+    roomsDAO.createSchema()
+    customersDAO.createSchema()
+    bookingsDAO.createSchema()
+    invoicesDAO.createSchema()
+    invoiceItemsDAO.createSchema()
 }
 
-module.exports = createSchema()
+module.exports = createSchemas
