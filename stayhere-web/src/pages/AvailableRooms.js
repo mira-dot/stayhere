@@ -40,7 +40,7 @@ const AvailableRooms = () => {
   return (
     <>
       <h2 className="text-center">Available Rooms</h2>
-      <div className="row m-2">
+      <div className="row m-2 bg-info-subtle border border-1 border-primary">
         <span className="col-4">Check-in: {checkin}</span>
         <span className="col-4">Check-out: {checkout}</span>
         <span className="col-4">Guests: {guests}</span>

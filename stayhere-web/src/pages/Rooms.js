@@ -21,7 +21,7 @@ const Rooms = ({ rooms, totalDays }) => {
         <>
             {
                 rooms.map(room =>
-                    <div className="row m-2 border border-1 border-primary p-2" key={room.RoomId}>
+                    <div className="row m-2 border border-1 border-primary p-2 bg-secondary" key={room.RoomId}>
                         <div className="col-2">
                             <span className="d-block">RoomId: {room.RoomId}</span>
                             <span className="d-block">Capacity: {room.Capacity}</span>
