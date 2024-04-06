@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
-const { areIntervalsOverlapping } = require('date-fns');
+const { areIntervalsOverlapping, isDate } = require('date-fns');
 const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
@@ -26,6 +26,11 @@ class RoomsDAO {
     }
 
     findAvailableRooms = async (checkin, checkout, guests) => {
+        // validate params
+        if (!isDate(checkin) || !isDate(checkout) || isNaN(guests)) {
+            throw new Error("Invalid input params")
+        }
+
         const allBookings = await mongoose.model("Booking").find({})
         const allRooms = await this.getAll()
         return allRooms.filter(room => {
