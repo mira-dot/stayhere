@@ -14,6 +14,7 @@ const Bookings = () => {
                 else
                     setBookings(response.data);
             })
+            .catch(error => setErrorValue(error.response?.data ?? "Unknown error"));
     }, [])
 
     const changeStatus = (bookingId, status) => {
@@ -31,6 +32,7 @@ const Bookings = () => {
                     })
                 }
             })
+            .catch(error => setErrorValue(error.response?.data ?? "Unknown error"));
     }
 
     const issueInvoice = (bookingId) => {
@@ -43,6 +45,7 @@ const Bookings = () => {
                     if (newWindow) newWindow.opener = null
                 }
             })
+            .catch(error => setErrorValue(error.response?.data ?? "Unknown error"));
     }
 
     const mailTo = (booking) => {

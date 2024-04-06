@@ -29,12 +29,13 @@ const AvailableRooms = () => {
 
     axios.get(`${process.env.REACT_APP_API_BASE_URL}/room/get-available-rooms?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
       .then((response) => {
-        if (response.status !== 200)
+        if (response.status !== 200) {
           setErrorValue(response.statusText)
+        }
         else
           setRooms(response.data);
       })
-      .catch(error => setErrorValue(error));
+      .catch(error => setErrorValue(error.response?.data ?? "Unknown error"));
   }, [checkin, checkout, guests, setCheckIn, setCheckOut, setGuests, refreshTime]);
 
   return (

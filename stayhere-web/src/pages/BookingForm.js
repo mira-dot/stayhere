@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MyGlobalContext } from "..";
 
 const BookingForm = ({ bookingDetails, visible, onClose }) => {
+    const [errorValue, setErrorValue] = useState("");
     const { setRefreshTime } = useContext(MyGlobalContext);
     const [showThankYou, setShowThankYou] = useState(false);
     const [booking, setBooking] = useState({
@@ -51,7 +52,9 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
             Guests: bookingDetails.Guests,
             FinalPrice: bookingDetails.FinalPrice,
             Status: "NEW"
-        }).then(() => { setRefreshTime(new Date()); setShowThankYou(true) })
+        })
+            .then(() => { setRefreshTime(new Date()); setShowThankYou(true) })
+            .catch(error => setErrorValue(error.response?.data ?? "Unknown error"));
     }
     const isValid = (e) => {
         setBooking(state => ({
@@ -72,6 +75,7 @@ const BookingForm = ({ bookingDetails, visible, onClose }) => {
     const bookingContent = () => {
         return (
             <div>
+                {errorValue.length > 0 && <div className="text-white text-center strong bg-danger">{errorValue}</div>}
                 <div className="row">
                     <div className="col-6">
                         <label className="form-label">First Name</label>

@@ -15,8 +15,7 @@ const Invoice = () => {
                     setInvoice(response.data)
                 }
             })
-            .catch((error) => setErrorValue("Invoice not found."))
-            .finally();
+            .catch(error => setErrorValue(error.response?.data ?? "Unknown error"))
     }, [searchParams])
     return (
         <>
