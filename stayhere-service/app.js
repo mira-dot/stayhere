@@ -16,7 +16,7 @@ app.use(jsonParser)
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(urlencodedParser)
 
-app.get("/", () => {
+app.get("/", (req, res) => {
     res.send("<h1>Service is OK!</h1>");
 });
 
