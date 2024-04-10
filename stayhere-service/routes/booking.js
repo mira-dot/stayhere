@@ -18,7 +18,8 @@ router.post("/create", async (req, res) => {
             req.body.LastName?.length > 0 &&
             req.body.Email?.length > 0 &&
             req.body.Address?.length > 0 &&
-            ["CASH", "CARD"].includes(req.body.PaymentType)
+            ["CASH", "CARD"].includes(req.body.PaymentType) &&
+            req.body.Status === "NEW"
         if (!isValid) {
             res.status(500).send("All mandatory fields must be filled with valid data")
             return
